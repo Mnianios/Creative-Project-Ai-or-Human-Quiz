@@ -72,6 +72,7 @@
         ];
 
         let currentQuestion = 0; // Start with the first question
+        let answerIsAi = 0; // a counter for A.I. answers
 
         // Function to load a question
         function loadQuestion() {
@@ -89,6 +90,8 @@
             if (selected === question.correct) {
                 result.innerText = "Correct! Great guess.";
                 result.style.color = "green";
+                // increment the counter
+                answerIsAi++;
             } else {
                 result.innerText = `Wrong! The correct answer was ${question.correct === 'A' ? 'Option A' : 'Option B'}.`;
                 result.style.color = "red";
@@ -101,6 +104,7 @@
                     loadQuestion();
                 } else {
                     // End of the game
+                    // add a percentage of A.I. vs Human selected Art in answers.
                     result.innerText = "Game Over! Thanks for playing.";
                     result.style.color = "blue";
                     document.querySelector(".comparison-container").style.display = "none"; // Hide the images
