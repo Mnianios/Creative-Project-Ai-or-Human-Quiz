@@ -103,6 +103,7 @@
 
         let currentQuestion = 0; // Start with the first question
         let userChoices = []; // Track user preferences
+        let AiPercentage=0;
 
         // Function to start the game
         function startGame() {
@@ -168,8 +169,10 @@
                 `;
                 if (isAI) aiPreferred++;
             });
+            AiPercentage=aiPreferred/questions.length*(100);
+            //percentage of A.I. prefered art.
 
-            resultsHTML += `<h3>You preferred AI-generated art in ${aiPreferred} out of ${questions.length} rounds.</h3>`;
+            resultsHTML += `<h3>You preferred AI-generated art in ${aiPreferred} out of ${questions.length} rounds You selected ${AiPercentage}% A.I. generated images </h3>`;
             resultDiv.innerHTML = resultsHTML;
             resultDiv.style.display = "block"; // Show the results section
         }
