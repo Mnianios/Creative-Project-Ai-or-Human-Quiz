@@ -3,117 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI vs. Human: Who Did It Better?</title>
+    <title>Art Preference Challenge</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 20px;
         }
+        #welcome-container, #question-container, #result {
+            display: none; /* Initially hidden */
+        }
+        #welcome-container {
+            display: block; /* Show the welcome screen first */
+        }
         .comparison-container {
-            display: flex; /* Use flexbox for horizontal alignment */
-            justify-content: center; /* Center the images horizontally */
-            gap: 20px; /* Add space between images */
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
         }
         .option {
-            text-align: center; /* Center text under each image */
+            text-align: center;
         }
         img {
-            width: 500px; /* Force a fixed width */
-            height: 500px; /* Force a fixed height */
-            object-fit: cover; /* Crop the image to fill the dimensions proportionally */
-            display: block; /* Removes any extra spacing from inline elements */
-            margin: auto; /* Centers the image inside its container */
-            border: 1px solid #ddd; /* Optional border for visuals */
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border: 1px solid #ddd;
         }
         button {
-            margin: 10px;
+            margin-top: 10px;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
         }
-        #result {
-            font-weight: bold;
-            margin-top: 20px;
+        #result img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border: 1px solid #ddd;
         }
     </style>
 </head>
 <body>
-    <h1>AI vs. Human: Who Did It Better?</h1>
-    <div class="comparison-container">
-        <div class="option" id="optionA">
-            <p>Option A:</p>
-            <img src="" alt="Option A Image">
-        </div>
-        <div class="option" id="optionB">
-            <p>Option B:</p>
-            <img src="" alt="Option B Image">
+    <!-- Welcome Page -->
+    <div id="welcome-container">
+        <h1>Welcome to the Art Preference Challenge</h1>
+        <p id="description">[Welcome to the "insert Title" Quiz, you will asked to choose between two artistic images based on your personal preferences, one image will be created by an artist and the other will be A.I generated but this will not be disclosed to you until the end of the quiz.</p>
+        <button onclick="startGame()">Start the Challenge</button>
+    </div>
+
+    <!-- Game Questions -->
+    <div id="question-container">
+        <h1>Art Preference Challenge</h1>
+        <div class="comparison-container">
+            <div class="option" id="optionA">
+                <img src="" alt="Option A Image">
+                <button onclick="chooseOption('A')">Choose A</button>
+            </div>
+            <div class="option" id="optionB">
+                <img src="" alt="Option B Image">
+                <button onclick="chooseOption('B')">Choose B</button>
+            </div>
         </div>
     </div>
-    <div>
-        <button onclick="checkAnswer('A')">Option A is AI</button>
-        <button onclick="checkAnswer('B')">Option B is AI</button>
-    </div>
-    <p id="result"></p>
+
+    <!-- Results -->
+    <div id="result"></div>
 
     <script>
-        // Questions Array: Each question has image paths and the correct answer
+        // Questions Array: Each question has image paths and the answer
         const questions = [
             {
-                optionA: "images/Ai-Art1.jpeg", // Replace with your actual image paths
-                optionB: "images/Human-Art1.jpg",
+                optionA: "images/art_ai1.jpg", // AI-generated
+                optionB: "images/art_human1.jpg", // Human-made
                 correct: "A"
             },
             {
-                optionA: "images/human2.jpg",
-                optionB: "images/ai2.jpg",
+                optionA: "images/art_human2.jpg",
+                optionB: "images/art_ai2.jpg",
                 correct: "B"
-            }
+            },
+            // Add more questions as needed
         ];
 
         let currentQuestion = 0; // Start with the first question
-        let answerIsAi = 0; // a counter for A.I. answers
+        let userChoices = []; // Track user preferences
+
+        // Function to start the game
+        function startGame() {
+            document.getElementById("welcome-container").style.display = "none"; // Hide welcome screen
+            document.getElementById("question-container").style.display = "block"; // Show questions
+            loadQuestion(); // Load the first question
+        }
 
         // Function to load a question
         function loadQuestion() {
             const question = questions[currentQuestion];
             document.querySelector("#optionA img").src = question.optionA;
             document.querySelector("#optionB img").src = question.optionB;
-            document.getElementById("result").innerText = ""; // Clear the result from the previous question
+            document.getElementById("result").innerText = ""; // Clear the result for the previous round
         }
 
-        // Function to check the answer
-        function checkAnswer(selected) {
-            const question = questions[currentQuestion];
-            const result = document.getElementById("result");
+        // Function to record the user's choice
+        function chooseOption(selected) {
+            userChoices.push({
+                choice: selected,
+                correct: questions[currentQuestion].correct
+            });
 
-            if (selected === question.correct) {
-                result.innerText = "Correct! Great guess.";
-                result.style.color = "green";
-                // increment the counter
-                answerIsAi++;
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion(); // Load the next question
             } else {
-                result.innerText = `Wrong! The correct answer was ${question.correct === 'A' ? 'Option A' : 'Option B'}.`;
-                result.style.color = "red";
+                showResults(); // Show the final results
             }
-
-            // Move to the next question after 2 seconds
-            setTimeout(() => {
-                currentQuestion++;
-                if (currentQuestion < questions.length) {
-                    loadQuestion();
-                } else {
-                    // End of the game
-                    // add a percentage of A.I. vs Human selected Art in answers.
-                    result.innerText = "Game Over! Thanks for playing.";
-                    result.style.color = "blue";
-                    document.querySelector(".comparison-container").style.display = "none"; // Hide the images
-                }
-            }, 2000);
         }
 
-        // Load the first question when the page loads
-        loadQuestion();
+        // Function to display the results
+        function showResults() {
+            const resultDiv = document.getElementById("result");
+            const questionContainer = document.getElementById("question-container");
+            questionContainer.style.display = "none"; // Hide the questions
+
+            let aiPreferred = 0; // Count how many times AI was preferred
+            let resultsHTML = "<h2>Your Results:</h2>";
+
+            userChoices.forEach((choice, index) => {
+                const question = questions[index];
+                const isAI = choice.choice === question.correct;
+                const chosenImage = choice.choice === "A" ? question.optionA : question.optionB;
+                const otherImage = choice.choice === "A" ? question.optionB : question.optionA;
+
+                resultsHTML += `
+                    <div style="margin: 20px 0; text-align: center;">
+                        <p>Question ${index + 1}: You chose 
+                        <strong>${choice.choice === "A" ? "Option A" : "Option B"}</strong> - 
+                        ${isAI ? "<span style='color: green;'>AI</span>" : "<span style='color: blue;'>Human</span>"}</p>
+                        <div style="display: flex; justify-content: center; gap: 20px;">
+                            <div>
+                                <p>Your Choice:</p>
+                                <img src="${chosenImage}" alt="Chosen Image">
+                            </div>
+                            <div>
+                                <p>Other Option:</p>
+                                <img src="${otherImage}" alt="Other Image">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                if (isAI) aiPreferred++;
+            });
+
+            resultsHTML += `<h3>You preferred AI-generated art in ${aiPreferred} out of ${questions.length} rounds.</h3>`;
+            resultDiv.innerHTML = resultsHTML;
+            resultDiv.style.display = "block"; // Show the results section
+        }
     </script>
 </body>
 </html>
