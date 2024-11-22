@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI vs. Human: Who Did It Better?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .comparison-container {
+            display: flex; /* Use flexbox for horizontal alignment */
+            justify-content: center; /* Center the images horizontally */
+            gap: 20px; /* Add space between images */
+        }
+        .option {
+            text-align: center; /* Center text under each image */
+        }
+        img {
+            width: 500px; /* Force a fixed width */
+            height: 500px; /* Force a fixed height */
+            object-fit: cover; /* Crop the image to fill the dimensions proportionally */
+            display: block; /* Removes any extra spacing from inline elements */
+            margin: auto; /* Centers the image inside its container */
+            border: 1px solid #ddd; /* Optional border for visuals */
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI vs. Human: Who Did It Better?</h1>
+    <div class="comparison-container">
+        <div class="option" id="optionA">
+            <p>Option A:</p>
+            <img src="" alt="Option A Image">
+        </div>
+        <div class="option" id="optionB">
+            <p>Option B:</p>
+            <img src="" alt="Option B Image">
+        </div>
+    </div>
+    <div>
+        <button onclick="checkAnswer('A')">Option A is AI</button>
+        <button onclick="checkAnswer('B')">Option B is AI</button>
+    </div>
+    <p id="result"></p>
+
+    <script>
+        // Questions Array: Each question has image paths and the correct answer
+        const questions = [
+            {
+                optionA: "images/Ai-Art1.jpeg", // Replace with your actual image paths
+                optionB: "images/Human-Art1.jpg",
+                correct: "A"
+            },
+            {
+                optionA: "images/human2.jpg",
+                optionB: "images/ai2.jpg",
+                correct: "B"
+            }
+        ];
+
+        let currentQuestion = 0; // Start with the first question
+
+        // Function to load a question
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            document.querySelector("#optionA img").src = question.optionA;
+            document.querySelector("#optionB img").src = question.optionB;
+            document.getElementById("result").innerText = ""; // Clear the result from the previous question
+        }
+
+        // Function to check the answer
+        function checkAnswer(selected) {
+            const question = questions[currentQuestion];
+            const result = document.getElementById("result");
+
+            if (selected === question.correct) {
+                result.innerText = "Correct! Great guess.";
+                result.style.color = "green";
+            } else {
+                result.innerText = `Wrong! The correct answer was ${question.correct === 'A' ? 'Option A' : 'Option B'}.`;
+                result.style.color = "red";
+            }
+
+            // Move to the next question after 2 seconds
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    loadQuestion();
+                } else {
+                    // End of the game
+                    result.innerText = "Game Over! Thanks for playing.";
+                    result.style.color = "blue";
+                    document.querySelector(".comparison-container").style.display = "none"; // Hide the images
+                }
+            }, 2000);
+        }
+
+        // Load the first question when the page loads
+        loadQuestion();
+    </script>
+</body>
+</html>
