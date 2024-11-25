@@ -43,6 +43,7 @@
             height: 600px;
             object-fit: cover;
             border: 1px solid #ddd;
+            
         }
         button {
             margin-top: 10px;
@@ -76,16 +77,17 @@
         <h1>Art Preference Challenge</h1>
         <div class="comparison-container">
             <div class="option" id="optionA">
-                <img src="" alt="Option A Image">
+                <!-- Add lazy loading attribute here -->
+                <img src="" alt="Option A Image" loading="lazy">
                 <button onclick="chooseOption('A')">Choose A</button>
             </div>
             <div class="option" id="optionB">
-                <img src="" alt="Option B Image">
+                <!-- Add lazy loading attribute here -->
+                <img src="" alt="Option B Image" loading="lazy">
                 <button onclick="chooseOption('B')">Choose B</button>
             </div>
         </div>
     </div>
-
     <!-- Results -->
     <div id="result"></div>
 
