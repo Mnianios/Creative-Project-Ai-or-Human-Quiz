@@ -89,20 +89,19 @@
     <!-- Results -->
     <div id="result"></div>
 
-    <script>
-        const questions = [
-            { optionA: "Images/Ai-Art1.jpeg", optionB: "Images/Human-Art1.jpg", correct: "A" },
-            { optionA: "Images/Human-Art2.jpg", optionB: "Images/Ai-Art2.png", correct: "B" },
-            { optionA: "Images/Ai-Art3.jpeg", optionB: "Images/Human-Art3.jpg", correct: "A" },
-            { optionA: "Images/Human-Art4.jpg", optionB: "Images/Ai-Art4.jpg", correct: "B" },
-            { optionA: "Images/Ai-Art5.jpg", optionB: "Images/Human-Art5.jpg", correct: "A" },
-            { optionA: "Images/Human-Art6.jpg", optionB: "Images/Ai-Art6.jpg", correct: "B" },
-            { optionA: "Images/Ai-Art7.jpg", optionB: "Images/Human-Art7.jpg", correct: "A" },
-            { optionA: "Images/Human-Art8.jpg", optionB: "Images/Ai-Art8.jpg", correct: "B" },
-            { optionA: "Images/Ai-Art9.jpg", optionB: "Images/Human-Art9.jpg", correct: "A" },
-            { optionA: "Images/Human-Art10.jpg", optionB: "Images/Ai-Art10.jpeg", correct: "B" }
-        ];
-
+   <script>
+    const questions = [
+        { optionA: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Ai-Art1.jpeg", optionB: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Human-Art1.jpg", correct: "A" },
+        { optionA: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Human-Art2.jpg", optionB: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Ai-Art2.png", correct: "B" },
+        { optionA: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Ai-Art3.jpeg", optionB: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Human-Art3.jpg", correct: "A" },
+        { optionA: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Human-Art4.jpg", optionB: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Ai-Art4.jpg", correct: "B" },
+        { optionA: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Ai-Art5.jpg", optionB: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Human-Art5.jpg", correct: "A" },
+        { optionA: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Human-Art6.jpg", optionB: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Ai-Art6.jpg", correct: "B" },
+        { optionA: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Ai-Art7.jpg", optionB: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Human-Art7.jpg", correct: "A" },
+        { optionA: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Human-Art8.jpg", optionB: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Ai-Art8.jpg", correct: "B" },
+        { optionA: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Ai-Art9.jpg", optionB: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Human-Art9.jpg", correct: "A" },
+        { optionA: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Human-Art10.jpg", optionB: "https://raw.githubusercontent.com/Mnianios/Creative-Project-Ai-or-Human-Quiz/main/Images/Ai-Art10.jpeg", correct: "B" }
+    ];
 
         let currentQuestion = 0; // Start with the first question
         let userChoices = []; // Track user preferences
